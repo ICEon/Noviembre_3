@@ -29,29 +29,7 @@ $(document).ready(function(){
 					switch(boton){
 				case 1:
 				
-				alert(' Version:' + device.version);
-					function readFiles(){
-                     window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem){
-                      fileSystem.root.getFile('log.txt', null, function(archivo){
-                       archivo.file(function(archivo){
-                         var lector = new FileReader();
-                         lector.onloadend = function(e){
-alert(e.target.result);
-
-                         }
-					   					   alert(' Version:' + device.version + '\n' + lector.readAsText(file));                       
-
-                      },function(){
-                         pgAlert("No existe el archivo, agrega contenido y luego presiona en Escribir");
-                        }
-	                 );},function(err){
-                          pgAlert("No se pudo acceder al sistema de archivos");
-                         });
-                    },function(err){
-                       pgAlert("No se pudo acceder al sistema de archivos");
-                       });
-                   }
-					
+				readFiles();
 					
 					break;
 				case 2:
@@ -111,3 +89,26 @@ pgAlert("No se pudo acceder al sistema de archivos");
 function eventHistory(action){
 $('#eventsHistory').append('<li>'+action+'</li>');
 }
+
+					function readFiles(){
+                     window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem){
+                      fileSystem.root.getFile('log.txt', null, function(archivo){
+                       archivo.file(function(archivo){
+                         var lector = new FileReader();
+                         lector.onloadend = function(e){
+alert(e.target.result);
+
+                         }
+					   					   alert(' Version:' + device.version + '\n' + lector.readAsText(file));                       
+
+                      },function(){
+                         pgAlert("No existe el archivo, agrega contenido y luego presiona en Escribir");
+                        }
+	                 );},function(err){
+                          pgAlert("No se pudo acceder al sistema de archivos");
+                         });
+                    },function(err){
+                       pgAlert("No se pudo acceder al sistema de archivos");
+                       });
+                   }
+	
