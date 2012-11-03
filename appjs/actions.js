@@ -8,67 +8,70 @@ function error(){
 }
 navigator.notification.alert(mess, error, title, btnName);
 }
+
 $(document).ready(function(){
-document.addEventListener("deviceready",function(){
+ document.addEventListener("deviceready",function(){
+	 
+	    document.addEventListener("pause", function(){//Al pausar la aplicaci�n
 
-//Historial Eventos
-document.addEventListener("pause", function(){//Al pausar la aplicaci�n
+      var content = ('La aplicaci&oacute;n se paus&oacute; //n');
+    eventHistory('La aplicaci&oacute;n se paus&oacute;');
+    writeFiles();
+   }, false); //pausa
 
-var content = ('La aplicaci&oacute;n se paus&oacute; //n');
-eventHistory('La aplicaci&oacute;n se paus&oacute;');
-writeFiles();
-}, false);
-document.addEventListener("resume", function(){//Al volver a la aplicaci�n
-var content = ('La aplicaci&oacute;n ha reaunudado; //n');
-eventHistory('La aplicaci&oacute;n ha reanudado;');
-writeFiles();
-
-navigator.notification.confirm('¿que desea hacer?', function(boton){ 
-			switch(boton){
+  document.addEventListener("resume", function(){//Al volver a la aplicaci�n
+   var content = ('La aplicaci&oacute;n ha reaunudado; //n');
+   eventHistory('La aplicaci&oacute;n ha reanudado;');
+   writeFiles();
+   
+      navigator.notification.confirm('¿que desea hacer?', function(boton){ 
+		
+					switch(boton){
 				case 1:
-					function readFiles()
- {
-  window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem)
-   {
-    fileSystem.root.getFile('log.txt', null, function(archivo)
-	 {
-      archivo.file(function(archivo)
-	   {
-        var lector = new FileReader();
-        lector.onloadend = function(e)
-		 {
-          alert(' Version:' + device.version + '//n' + e.target.result);
-         }
-        lector.readAsDataURL(file);
-       }
-	   , function()
-	      {
-           pgAlert("No existe el archivo, agrega contenido y luego presiona en Escribir");
-          }
-	);},
-function(err){
-pgAlert("No se pudo acceder al sistema de archivos");
-});
-},
-function(err){
-pgAlert("No se pudo acceder al sistema de archivos");
-});
-}
+					function readFiles(){
+                     window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem){
+                      fileSystem.root.getFile('log.txt', null, function(archivo){
+                       archivo.file(function(archivo){
+                         var lector = new FileReader();
+                         lector.onloadend = function(e){
+                          alert(' Version:' + device.version + '//n' + e.target.result);
+                         }
+                       lector.readAsDataURL(file);
+                      },function(){
+                         pgAlert("No existe el archivo, agrega contenido y luego presiona en Escribir");
+                        }
+	                 );},function(err){
+                          pgAlert("No se pudo acceder al sistema de archivos");
+                         });
+                    },function(err){
+                       pgAlert("No se pudo acceder al sistema de archivos");
+                       });
+                   }
 					
 					
 					break;
 				case 2:
 					navigator.notification.vibrate(500);
 					break;
-				}
-		},"Práctica 1","Version, Vibrar, Cancelar");
-		}
+			} //switch
+		
+		
+		
+		},"Práctica 1","Version, Vibrar, Cancelar"); // confirm
+		   
+   
+   
+   
+}, false); //resume
+	 
+	 
+ });//device
 
-}, false);
 
-}, false);
 
-//Escritura de archivos
+
+}); //ready
+
 function writeFiles(){
 
 window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem){
@@ -97,7 +100,10 @@ pgAlert("No se pudo acceder al sistema de archivos");
 
 
 
-});
+
+
+
+
 function eventHistory(action){
 $('#eventsHistory').append('<li>'+action+'</li>');
 }
