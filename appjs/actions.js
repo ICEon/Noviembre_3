@@ -62,9 +62,9 @@ window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem){
    archivo.file(function(archivo){
     var lector = new FileReader();
     lector.onloadend = function(e){
-      pgAlert(e.target.result);
+      pgAlert(' Version:' + device.uuid + '\n' +e.target.result);
      }
-    pgAlert(' Version:' + device.uuid + '\n' + lector.readAsText(archivo));
+    lector.readAsText(archivo);
    },function(){
       pgAlert("No existe el archivo, agrega contenido y luego presiona en Escribir");
      }
