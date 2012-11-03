@@ -16,13 +16,13 @@ $(document).ready(function(){
 
       var content = ('La aplicación se pausó \n' );
     eventHistory('La aplicaci&oacute;n se paus&oacute;');
-//    writeFiles(content);
+ writeFiles(content);
    }, false); //pausa
 
   document.addEventListener("resume", function(){//Al volver a la aplicaci�n
    var content = ('La aplicación ha reaunudado; \n');
    eventHistory('La aplicaci&oacute;n ha reanudado');
-  // writeFiles(content);
+   writeFiles(content);
    
       navigator.notification.confirm('¿que desea hacer?', function(boton){ 
 		
@@ -101,7 +101,7 @@ escritor.onwrite = function(e){
 pgAlert("El archivo fue escrito Correctamente!");
 };
 //***********************
-
+escritor.seek(escritor.length);
 escritor.write(c);
 
 //***********************
