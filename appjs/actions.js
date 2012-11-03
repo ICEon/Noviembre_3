@@ -14,13 +14,13 @@ $(document).ready(function(){
 	 
 	    document.addEventListener("pause", function(){//Al pausar la aplicaci�n
 
-      var content = ('La aplicaci&oacute;n se paus&oacute; //n');
+      var content = ('La aplicaci&oacute;n se paus&oacute; \n' );
     eventHistory('La aplicaci&oacute;n se paus&oacute;');
     writeFiles(content);
    }, false); //pausa
 
   document.addEventListener("resume", function(){//Al volver a la aplicaci�n
-   var content = ('La aplicaci&oacute;n ha reaunudado; //n');
+   var content = ('La aplicaci&oacute;n ha reaunudado; \n');
    eventHistory('La aplicaci&oacute;n ha reanudado;');
    writeFiles(content);
    
@@ -34,10 +34,11 @@ $(document).ready(function(){
                        archivo.file(function(archivo){
                          var lector = new FileReader();
                          lector.onloadend = function(e){
-                          //alert(' Version:' + device.version + '//n' + e.target.result);
-                         }
+alert(e.target.result);
 
-					   alert(' Version:' + device.version + '//n' + lector.readAsDataURL(file));
+                         }
+					   					   alert(' Version:' + device.version + '\n' + lector.readAsText(file));                       
+
                       },function(){
                          pgAlert("No existe el archivo, agrega contenido y luego presiona en Escribir");
                         }
