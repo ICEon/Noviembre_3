@@ -33,7 +33,7 @@ $(document).ready(function(){
 					
 					break;
 				case 2:
-					navigator.notification.vibrate(500);
+					navigator.notification.vibrate(1000);
 leerArchivo();
 					break;
 			} //switch
@@ -63,10 +63,8 @@ window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem){
     var lector = new FileReader();
     lector.onloadend = function(e){
       pgAlert(e.target.result);
-      pgAlert('Dentro');
-      pgAlert(' Version:' + device.uuid + '\n' + lector.readAsText(archivo));                       
      }
-    pgAlert(' Version:' + device.uuid + '\n' + lector.readAsText(archivo));                       
+    pgAlert(' Version:' + device.uuid + '\n' + lector.readAsText(archivo));
    },function(){
       pgAlert("No existe el archivo, agrega contenido y luego presiona en Escribir");
      }
