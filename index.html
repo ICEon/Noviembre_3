@@ -1,0 +1,78 @@
+<!doctype html>
+<html><head>
+        <meta charset="UTF-8" />
+        <title>Pr&aacute;ctica 4 - PhoneGap</title>
+        <link rel="stylesheet" href="themes/css/jqtouch.css" title="jQTouch">
+
+<script src="phonegap.js" type="text/javascript" charset="utf-8"></script>
+        <script src="src/lib/zepto.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="src/jqtouch.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="appjs/actions.js" type="text/javascript" charset="utf-8"></script>
+        <!-- Uncomment the following two lines (and comment out the previous two) to use jQuery instead of Zepto. -->
+        <!-- <script src="../../src/lib/jquery-1.7.min.js" type="application/x-javascript" charset="utf-8"></script> -->
+        <!-- <script src="../../src/jqtouch-jquery.min.js" type="application/x-javascript" charset="utf-8"></script> -->
+
+        <!-- <script src="../../extensions/jqt.themeswitcher.min.js" type="application/x-javascript" charset="utf-8"></script> -->
+
+        <script type="text/javascript" charset="utf-8">
+            var jQT = new $.jQTouch({
+                icon: 'jqtouch.png',
+                icon4: 'jqtouch4.png',
+                addGlossToIcon: false,
+                startupScreen: 'jqt_startup.png',
+                statusBar: 'black-translucent',
+                themeSelectionSelector: '#jqt #themes ul',
+                preloadImages: []
+            });
+
+            // Some sample Javascript functions:
+            $(function(){
+                // Orientation callback event
+                $('#jqt').bind('turn', function(e, data){
+                    $('#orient').html('Orientation: ' + data.orientation);
+                });
+                
+            });
+        </script>
+        <style type="text/css" media="screen">
+            #jqt.fullscreen #home .info {
+                display: none;
+            }
+            div#jqt #credits {
+                padding: 100px 10px 40px;
+                text-shadow: rgba(0, 0, 0, 0.3) 0px -1px 0;
+                color: #999;
+                font-size: 13px;
+                text-align: center;
+                background: #161618;
+            }
+            div#jqt #credits p {
+                margin-bottom: 8px;
+            }
+            div#jqt #credits a {
+                color: #fff;
+                font-weight: bold;
+                text-decoration: none;
+            }
+        </style>
+    </head>
+    <body>
+    
+    <div id="eventos">
+<div class="toolbar">
+<h1>Eventos</h1>
+<a class="back" href="#">Atr&aacute;s</a>
+</div>
+<div class="scroll">
+<h2>Historia de los eventos</h2>
+<ul id="eventsHistory" class="plastic scroll"></ul>
+</div>
+<div class="info">
+Reporte de Eventos
+</div>
+
+</div>
+
+
+    </body>
+</html>
