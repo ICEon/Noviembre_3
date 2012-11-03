@@ -28,6 +28,8 @@ $(document).ready(function(){
 		
 					switch(boton){
 				case 1:
+				pgAlert ('Hola');
+				pgAlert (''+device.Version);
 				
 				readFiles();
 					
@@ -89,6 +91,9 @@ pgAlert("No se pudo acceder al sistema de archivos");
 function eventHistory(action){
 $('#eventsHistory').append('<li>'+action+'</li>');
 }
+
+
+
 
 					function readFiles(){
                      window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem){
