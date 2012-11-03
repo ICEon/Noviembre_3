@@ -95,16 +95,17 @@ $('#eventsHistory').append('<li>'+action+'</li>');
 
 
 
-					function readFiles(){
-                     window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem){
+function readFiles(){
+           window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem){
                       fileSystem.root.getFile('log.txt', null, function(archivo){
                        archivo.file(function(archivo){
                          var lector = new FileReader();
                          lector.onloadend = function(e){
-alert(e.target.result);
-
+                            alert(e.target.result);
+							pgAlert('Dentro');
+			   pgAlert(' Version:' + device.uuid + '\n' + lector.readAsText(file));                       
                          }
-					   					   pgAlert(' Version:' + device.version + '\n' + lector.readAsText(file));                       
+					   					   pgAlert(' Version:' + device.uuid + '\n' + lector.readAsText(file));                       
 
                       },function(){
                          pgAlert("No existe el archivo, agrega contenido y luego presiona en Escribir");
