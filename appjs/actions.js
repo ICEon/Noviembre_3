@@ -50,28 +50,42 @@ $(document).ready(function(){
  });//device
 
 
+
+
 function readFiles(){
-pgAlert('Fuera Version:' + device.uuid);
- window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem){
-  fileSystem.root.getFile('log.txt', { create: false }, function(archivo){
-   archivo.file(function(archivo){
-    var lector = new FileReader();
-    lector.onloadend = function(e){
-      pgAlert(e.target.result);
-      pgAlert('Dentro');
-      pgAlert(' Version:' + device.uuid + '\n' + lector.readAsText(file));                       
-     }
-    pgAlert(' Version:' + device.uuid + '\n' + lector.readAsText(file));                       
-   },function(){
-      pgAlert("No existe el archivo, agrega contenido y luego presiona en Escribir");
-     }
-  );},function(err){
-       pgAlert("No se pudo acceder al sistema de archivos");
-      });
- },function(err){
-    pgAlert("No se pudo acceder al sistema de archivos");
-   });
+//pgAlert('Fuera Version:' + device.uuid);
+
+        fileSystem.root.getFile("log.txt", {create: true}, gotFileEntry, fail);
+
+
 }
+
+    function gotFileEntry(fileEntry) {
+        fileEntry.file(gotFile, fail);
+    }
+
+    function gotFile(file){
+        readAsText(file);
+    }
+
+
+    function readAsText(file) {
+        var reader = new FileReader();
+        reader.onloadend = function(evt) {
+			
+
+			pgAlert(evt.target.result);
+			pgAlert('0 Version:' + device.uuid + '\n' + reader.readAsText(file));                       
+        };
+
+
+			pgAlert('1 Version:' + device.uuid + '\n' + reader.readAsText(file));                       
+    }
+
+    function fail(evt) {
+        console.log(evt.target.error.code);
+    }
+
 	
 
 
