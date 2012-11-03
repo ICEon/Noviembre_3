@@ -28,6 +28,8 @@ $(document).ready(function(){
 		
 					switch(boton){
 				case 1:
+				
+				alert(' Version:' + device.version);
 					function readFiles(){
                      window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem){
                       fileSystem.root.getFile('log.txt', null, function(archivo){
