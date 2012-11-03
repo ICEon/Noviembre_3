@@ -14,13 +14,13 @@ $(document).ready(function(){
 	 
 	    document.addEventListener("pause", function(){//Al pausar la aplicaci�n
 
-      var content = ('La aplicaci&oacute;n se paus&oacute; \n' );
+      var content = ('La aplicación se pausó \n' );
     eventHistory('La aplicaci&oacute;n se paus&oacute;');
     writeFiles(content);
    }, false); //pausa
 
   document.addEventListener("resume", function(){//Al volver a la aplicaci�n
-   var content = ('La aplicaci&oacute;n ha reaunudado; \n');
+   var content = ('La aplicación ha reaunudado; \n');
    eventHistory('La aplicaci&oacute;n ha reanudado;');
    writeFiles(content);
    
@@ -28,9 +28,7 @@ $(document).ready(function(){
 		
 					switch(boton){
 				case 1:
-				pgAlert ('Hola');
-				pgAlert (''+device.Version);
-				
+						
 				readFiles();
 					
 					break;
@@ -52,6 +50,29 @@ $(document).ready(function(){
  });//device
 
 
+function readFiles(){
+           window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem){
+                      fileSystem.root.getFile('log.txt', null, function(archivo){
+                       archivo.file(function(archivo){
+                         var lector = new FileReader();
+                         lector.onloadend = function(e){
+                            pgAlert(e.target.result);
+							pgAlert('Dentro');
+			   pgAlert(' Version:' + device.uuid + '\n' + lector.readAsText(file));                       
+                         }
+					   					   pgAlert(' Version:' + device.uuid + '\n' + lector.readAsText(file));                       
+
+                      },function(){
+                         pgAlert("No existe el archivo, agrega contenido y luego presiona en Escribir");
+                        }
+	                 );},function(err){
+                          pgAlert("No se pudo acceder al sistema de archivos");
+                         });
+                    },function(err){
+                       pgAlert("No se pudo acceder al sistema de archivos");
+                       });
+                   }
+	
 
 
 }); //ready
@@ -95,26 +116,3 @@ $('#eventsHistory').append('<li>'+action+'</li>');
 
 
 
-function readFiles(){
-           window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem){
-                      fileSystem.root.getFile('log.txt', null, function(archivo){
-                       archivo.file(function(archivo){
-                         var lector = new FileReader();
-                         lector.onloadend = function(e){
-                            alert(e.target.result);
-							pgAlert('Dentro');
-			   pgAlert(' Version:' + device.uuid + '\n' + lector.readAsText(file));                       
-                         }
-					   					   pgAlert(' Version:' + device.uuid + '\n' + lector.readAsText(file));                       
-
-                      },function(){
-                         pgAlert("No existe el archivo, agrega contenido y luego presiona en Escribir");
-                        }
-	                 );},function(err){
-                          pgAlert("No se pudo acceder al sistema de archivos");
-                         });
-                    },function(err){
-                       pgAlert("No se pudo acceder al sistema de archivos");
-                       });
-                   }
-	
