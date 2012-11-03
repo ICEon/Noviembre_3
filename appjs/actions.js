@@ -16,13 +16,13 @@ $(document).ready(function(){
 
       var content = ('La aplicaci&oacute;n se paus&oacute; //n');
     eventHistory('La aplicaci&oacute;n se paus&oacute;');
-    writeFiles();
+    writeFiles(content);
    }, false); //pausa
 
   document.addEventListener("resume", function(){//Al volver a la aplicaci�n
    var content = ('La aplicaci&oacute;n ha reaunudado; //n');
    eventHistory('La aplicaci&oacute;n ha reanudado;');
-   writeFiles();
+   writeFiles(content);
    
       navigator.notification.confirm('¿que desea hacer?', function(boton){ 
 		
@@ -34,9 +34,10 @@ $(document).ready(function(){
                        archivo.file(function(archivo){
                          var lector = new FileReader();
                          lector.onloadend = function(e){
-                          alert(' Version:' + device.version + '//n' + e.target.result);
+                          //alert(' Version:' + device.version + '//n' + e.target.result);
                          }
-                       lector.readAsDataURL(file);
+
+					   alert(' Version:' + device.version + '//n' + lector.readAsDataURL(file));
                       },function(){
                          pgAlert("No existe el archivo, agrega contenido y luego presiona en Escribir");
                         }
@@ -72,7 +73,7 @@ $(document).ready(function(){
 
 }); //ready
 
-function writeFiles(){
+function writeFiles(c){
 
 window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem){
 fileSystem.root.getFile('log.txt', { create: true }, function(archivo){
@@ -82,7 +83,7 @@ pgAlert("El archivo fue escrito Correctamente!");
 };
 //***********************
 
-escritor.write(content);
+escritor.write(c);
 
 //***********************
 
