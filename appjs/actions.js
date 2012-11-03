@@ -34,6 +34,7 @@ $(document).ready(function(){
 					break;
 				case 2:
 					navigator.notification.vibrate(500);
+									readFiles();
 					break;
 			} //switch
 		
@@ -55,7 +56,7 @@ $(document).ready(function(){
 function readFiles(){
 //pgAlert('Fuera Version:' + device.uuid);
 
-        fileSystem.root.getFile("log.txt", {create: true}, gotFileEntry, fail);
+        fileSystem.root.getFile("log.txt", null, gotFileEntry, fail);
 
 
 }
