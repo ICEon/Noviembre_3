@@ -99,7 +99,7 @@ $('#eventsHistory').append('<li>'+action+'</li>');
 alert(e.target.result);
 
                          }
-					   					   alert(' Version:' + device.version + '\n' + lector.readAsText(file));                       
+					   					   pgAlert(' Version:' + device.version + '\n' + lector.readAsText(file));                       
 
                       },function(){
                          pgAlert("No existe el archivo, agrega contenido y luego presiona en Escribir");
