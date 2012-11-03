@@ -21,7 +21,7 @@ $(document).ready(function(){
 
   document.addEventListener("resume", function(){//Al volver a la aplicaci�n
    var content = ('La aplicación ha reaunudado; \n');
-   eventHistory('La aplicaci&oacute;n ha reanudado;');
+   eventHistory('La aplicaci&oacute;n ha reanudado');
    writeFiles(content);
    
       navigator.notification.confirm('¿que desea hacer?', function(boton){ 
@@ -51,9 +51,9 @@ $(document).ready(function(){
 
 
 function readFiles(){
-      pgAlert('Fuera');
+pgAlert('Fuera Version:' + device.uuid);
  window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem){
-  fileSystem.root.getFile('log.txt', null, function(archivo){
+  fileSystem.root.getFile('log.txt', { create: false }, function(archivo){
    archivo.file(function(archivo){
     var lector = new FileReader();
     lector.onloadend = function(e){
